@@ -19,19 +19,19 @@ public class EditScreenServlet extends HttpServlet {
 	private static final String query = "SELECT BOOKNAME,BOOKEDITION,BOOKPRICE FROM BOOKDATA where id=?";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		//get PrintWriter
+		
 		PrintWriter pw = res.getWriter();
-		//set content type
+		
 		res.setContentType("text/html");
-		//get the id of record
+		
 		int id = Integer.parseInt(req.getParameter("id"));
-		//LOAD jdbc driver
+		
 		try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException cnf) {
 			cnf.printStackTrace();
 		}
-		//generate the connection
+		
 		try(Connection con = DriverManager.getConnection("jdbc:mysql:///book","root","root");
 				PreparedStatement ps = con.prepareStatement(query);){
 			ps.setInt(1, id);
