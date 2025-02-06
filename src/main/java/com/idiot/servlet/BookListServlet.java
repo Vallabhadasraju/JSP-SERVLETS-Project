@@ -19,9 +19,9 @@ public class BookListServlet extends HttpServlet {
 	private static final String query = "SELECT ID,bookName,bookEdition,bookPrice FROM BOOKDATA";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		//get PrintWriter
+		
 		PrintWriter pw = res.getWriter();
-		//set content type
+		
 		res.setContentType("text/html");
 		
 		try {
@@ -29,7 +29,7 @@ public class BookListServlet extends HttpServlet {
 		}catch(ClassNotFoundException cnf) {
 			cnf.printStackTrace();
 		}
-		//generate the connection
+		
 		try(Connection con = DriverManager.getConnection("jdbc:mysql:///book","root","root");
 				PreparedStatement ps = con.prepareStatement(query);){
 			ResultSet rs = ps.executeQuery();
