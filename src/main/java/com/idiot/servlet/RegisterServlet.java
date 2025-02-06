@@ -18,21 +18,21 @@ public class RegisterServlet extends HttpServlet {
 	private static final String query = "INSERT INTO BOOKDATA(bookName,bookEdition,bookPrice) VALUES(?,?,?)";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		//get PrintWriter
+		
 		PrintWriter pw = res.getWriter();
-		//set content type
+		
 		res.setContentType("text/html");
-		//GET THE book info
+		
 		String bookName = req.getParameter("bookName");
 		String bookEdition = req.getParameter("bookEdition");
 		float bookPrice = Float.parseFloat(req.getParameter("bookPrice"));
-		//LOAD jdbc driver
+		
 		try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException cnf) {
 			cnf.printStackTrace();
 		}
-		//generate the connection
+		
 		try(Connection con = DriverManager.getConnection("jdbc:mysql:///book","root","root");
 				PreparedStatement ps = con.prepareStatement(query);){
 			ps.setString(1, bookName);
